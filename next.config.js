@@ -1,16 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  // 简化配置，确保与Next.js 13兼容
   experimental: {
     appDir: true,
   },
-  // 确保在Vercel上正确工作
-  output: 'standalone',
-  // 允许所有环境变量
-  env: {
-    DEEPSEEK_API_KEY: process.env.DEEPSEEK_API_KEY,
-    DEEPSEEK_BASE_URL: process.env.DEEPSEEK_BASE_URL,
-  },
+  // 移除output: 'standalone'，这可能导致部署问题
 };
 
 module.exports = nextConfig; 
