@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: "sk-80f1b61f68c04bd99c44764064b1b0fe",
-  baseURL: "https://api.deepseek.com",
+  apiKey: process.env.DEEPSEEK_API_KEY || "sk-80f1b61f68c04bd99c44764064b1b0fe",
+  baseURL: process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com",
 });
 
 export async function POST(request: NextRequest) {
@@ -16,6 +16,11 @@ export async function POST(request: NextRequest) {
         { error: 'Messages array is required' },
         { status: 400 }
       );
+    }
+
+    // 验证API密钥
+    if (!process.env.DEEPSEEK_API_KEY) {
+      console.warn('DEEPSEEK_API_KEY not found in environment variables');
     }
 
     // 调用DeepSeek API
